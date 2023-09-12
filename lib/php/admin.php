@@ -90,9 +90,9 @@ function wsform_register_submission_meta_boxes( $hook )
 {
 	if( $hook != 'wsform_sub' ) return false;
 	
-	$wf = new WebbsitesFormSub();
+	$wf = new WebbsitesFormSub( get_the_ID() );
 	
-	$wf->webbsitesform_sub(get_the_ID() );
+	// $wf->webbsitesform_sub(get_the_ID() );
 	
     add_meta_box(
         'wf-submission-display-meta-box-id',
@@ -101,7 +101,7 @@ function wsform_register_submission_meta_boxes( $hook )
         'wsform_sub',
         'normal',
         'low'
-        );
+    );
 }
 
 

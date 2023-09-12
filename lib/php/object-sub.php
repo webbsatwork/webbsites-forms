@@ -50,14 +50,11 @@ class WebbsitesFormSub extends WebbsitesForm
 		*/
 
 		// Populate several properties
-		// $this->set_form_constants();
-		// $this->form_options();
 		$this->form_input_types = $this::form_input_types();
 		$this->form_parameters  = $this::form_parameters();
 
 		// Get the submission info
 		$this->sub_id = $sub_id;
-
 		$fields = get_post_meta( $this->sub_id );
 
 		// Get the post title, save as form_title
@@ -568,151 +565,17 @@ class WebbsitesFormSub extends WebbsitesForm
 
 
 
-    // DEPRECATED
-	function edit_meta_box()
-	{
-		//print_array( $this );
-		//return;
-
-		$postid = $this->sub_id;
-		$post_json = $this->sub_fields['_wsform_sub_entry'][0];
-
-		$post = $this->sub_fields_entry;
-
-		// Get the post input
-		$input = $post->wf_input;
-
-		//print_array( $input );
-
-		$uploads = get_post_meta( $postid, '_wsform_attached_file' );
-
-		//print_array( $uploads );
-
-		// Metabox content
-		?>
-
-			<h3>Form Info</h6>
-
-			<ul class="form-lists" style="padding: 0 0 2em 2em; font-size: 12pt; line-height: 1.5;">
-				<li><strong>Sender Name:</strong> <?php echo $this->sub_wf_sender_name ?></li>
-				<li><strong>Sender Email:</strong> <?php echo $this->sub_wf_sender_email ?></li>
-				<li><strong>Form Name:</strong> <?php echo $this->post_title ?></li>
-				<li><strong>User IP Address:</strong> <?php echo $this->sub_wf_user_ip ?></li>
-				<li><strong>Date/Time stamp:</strong> <?php echo $this->sub_wf_date ?></li>
-			</ul>
-
-			<h6>Attachments</h6>
-
-			<p style="text-align: center;">
-				<button id="wsform-edit-values" class="button button-primary button-large">Edit Values</button>
-			</p>
-
-			<?php return false ?>
 
 
 
-			<div id="wsform-edit-values-div" class="wsform-hide">
-
-				<h3>Form Content</h6>
-
-				<form id="wf-form-save-metas">
-
-					<!--
-					<input type="hidden" class="wf-input-change wf-input-consts" name="wf_form_type" value="<?php echo $this->form_type ?>" />
-					<input type="hidden" class="wf-input-change wf-input-consts" name="wf_form_name" value="<?php echo $this->post_title ?>" />
-					<input type="hidden" class="wf-input-change wf-input-consts" name="wf_action" value="<?php echo $post->action ?>" />
-					<input type="hidden" class="wf-input-change wf-input-consts" name="wf_sender_name" value="<?php echo $post->wf_sender_name ?>" />
-					<input type="hidden" class="wf-input-change wf-input-consts" name="wf_sender_email" value="<?php echo $post->wf_sender_email ?>" />
-					<input type="hidden" class="wf-input-change wf-input-consts" name="wf_user_ip" value="<?php echo $post->wf_user_ip ?>" />
-					<input type="hidden" class="wf-input-change wf-input-consts" name="wf_time" value="<?php echo $post->wf_time ?>" />
-					-->
-
-					<table class="form-table">
-
-						<?php foreach( $input as $key => $val ) :
-
-						if( property_exists( $this, 'input_keys' ) )
-						{
-							$keys = $this->input_keys;
-							$label = $keys[$key];
-						}
-						else
-						{
-							$label = $key;
-						}
-
-						?>
-						<tr valign="top">
-							<th scope="row"><?php echo $label ?></th>
-							<td><input type="text" class="wf-input-change wf-input-vars" name="<?php echo $key ?>" value="<?php echo $val ?>" style="width: 100%;" /></td>
-						</tr>
-						<?php endforeach; ?>
-
-					</table>
-
-					<input type="hidden" id="_wsform_sub_entry" name="_wsform_sub_entry" value='<?php echo $post_json ?>' />
-
-				</form>
-
-			</div>
-
-			<script type="text/javascript">
-
-				jQuery(document).ready( function( $ ) {
-
-					$( '#wsform-edit-values' ).click( function( e ) {
-						e.preventDefault();
-						$( this ).hide();
-						$( '#wsform-edit-values-div' ).toggleClass( 'wsform-hide' );
-					});
-
-					$( '.wf-input-change' ).change( function() {
-
-						var input_consts = $( '.wf-input-consts' );
-						var input_vars = $( '.wf-input-vars' );
-
-						var json = {};
-						var json_vars = {};
-
-						jQuery.each( input_consts, function() {
-							json[this.name] = this.value || '';
-						});
-
-						jQuery.each( input_vars, function() {
-							json_vars[this.name] = this.value || '';
-						});
-
-						json.wf_input = json_vars;
-
-						json_str = JSON.stringify( json );
-
-						$( '#_wsform_sub_entry' ).val( json_str );
-
-					});
-
-				});
-
-				//// Find our form in the DOM using its class name.
-				//const form = document.getElementByClassName('.contact-form')[0];
-				//
-				//// Get the form data with our (yet to be defined) function.
-				//const data = getFormDataAsJSON(form);
-				//
-				//// Do something with the email address.
-				//doSomething(data.email);
-
-			</script>
-
-		<?php
-
-		//echo '<pre>';
-		//print_r($post);
-		//echo '</pre>';
-		//return;
 
 
 
-	}
+
+
+
+
+
 
 
 
@@ -1430,22 +1293,22 @@ class WebbsitesFormSub extends WebbsitesForm
 
 
 
-    function mark_message_read( $atts )
-    {
-        $msg_id = intval( $atts['msg_id'] );
-        $this->webbsitesform_sub( $msg_id );
-        $this->update_sub_meta( '_wsform_sub_is_read', 1 );
-    }
+    // function mark_message_read( $atts )
+    // {
+    //     $msg_id = intval( $atts['msg_id'] );
+    //     $this->webbsitesform_sub( $msg_id );
+    //     $this->update_sub_meta( '_wsform_sub_is_read', 1 );
+    // }
 
 
 
 
-    function trash_this_sub( $atts )
-    {
-        $msg_id = intval( $atts['msg_id'] );
-        $this->webbsitesform_sub( $msg_id );
-        $this->update_sub( 'post_status', 'trash' );
-    }
+    // function trash_this_sub( $atts )
+    // {
+    //     $msg_id = intval( $atts['msg_id'] );
+    //     $this->webbsitesform_sub( $msg_id );
+    //     $this->update_sub( 'post_status', 'trash' );
+    // }
 
 
 
@@ -1596,3 +1459,154 @@ class WebbsitesFormSub extends WebbsitesForm
     
     //     wp_die(); // this is required to terminate immediately and return a proper response
     // }
+
+
+
+
+
+
+        // // DEPRECATED
+	// function edit_meta_box()
+	// {
+	// 	//print_array( $this );
+	// 	//return;
+
+	// 	$postid = $this->sub_id;
+	// 	$post_json = $this->sub_fields['_wsform_sub_entry'][0];
+
+	// 	$post = $this->sub_fields_entry;
+
+	// 	// Get the post input
+	// 	$input = $post->wf_input;
+
+	// 	//print_array( $input );
+
+	// 	$uploads = get_post_meta( $postid, '_wsform_attached_file' );
+
+	// 	//print_array( $uploads );
+
+	// 	// Metabox content
+	// 	?>
+
+	// 		<h3>Form Info</h6>
+
+// 		<ul class="form-lists" style="padding: 0 0 2em 2em; font-size: 12pt; line-height: 1.5;">
+// 			<li><strong>Sender Name:</strong> <?php echo $this->sub_wf_sender_name ?></li>
+// 			<li><strong>Sender Email:</strong> <?php echo $this->sub_wf_sender_email ?></li>
+// 			<li><strong>Form Name:</strong> <?php echo $this->post_title ?></li>
+// 			<li><strong>User IP Address:</strong> <?php echo $this->sub_wf_user_ip ?></li>
+// 			<li><strong>Date/Time stamp:</strong> <?php echo $this->sub_wf_date ?></li>
+// 		</ul>
+
+// 		<h6>Attachments</h6>
+
+// 		<p style="text-align: center;">
+// 			<button id="wsform-edit-values" class="button button-primary button-large">Edit Values</button>
+// 		</p>
+
+// 		<?php return false ?>
+
+
+
+// 		<div id="wsform-edit-values-div" class="wsform-hide">
+
+// 			<h3>Form Content</h6>
+
+// 			<form id="wf-form-save-metas">
+
+// 				<!--
+// 				<input type="hidden" class="wf-input-change wf-input-consts" name="wf_form_type" value="<?php echo $this->form_type ?>" />
+// 				<input type="hidden" class="wf-input-change wf-input-consts" name="wf_form_name" value="<?php echo $this->post_title ?>" />
+// 				<input type="hidden" class="wf-input-change wf-input-consts" name="wf_action" value="<?php echo $post->action ?>" />
+// 				<input type="hidden" class="wf-input-change wf-input-consts" name="wf_sender_name" value="<?php echo $post->wf_sender_name ?>" />
+// 				<input type="hidden" class="wf-input-change wf-input-consts" name="wf_sender_email" value="<?php echo $post->wf_sender_email ?>" />
+// 				<input type="hidden" class="wf-input-change wf-input-consts" name="wf_user_ip" value="<?php echo $post->wf_user_ip ?>" />
+// 				<input type="hidden" class="wf-input-change wf-input-consts" name="wf_time" value="<?php echo $post->wf_time ?>" />
+// 				-->
+
+// 				<table class="form-table">
+
+// 					<?php foreach( $input as $key => $val ) :
+
+// 					if( property_exists( $this, 'input_keys' ) )
+// 					{
+// 						$keys = $this->input_keys;
+// 						$label = $keys[$key];
+// 					}
+// 					else
+// 					{
+// 						$label = $key;
+// 					}
+
+// 					?>
+// 					<tr valign="top">
+// 						<th scope="row"><?php echo $label ?></th>
+// 						<td><input type="text" class="wf-input-change wf-input-vars" name="<?php echo $key ?>" value="<?php echo $val ?>" style="width: 100%;" /></td>
+// 					</tr>
+// 					<?php endforeach; ?>
+
+// 				</table>
+
+// 				<input type="hidden" id="_wsform_sub_entry" name="_wsform_sub_entry" value='<?php echo $post_json ?>' />
+
+// 			</form>
+
+// 		</div>
+
+// 		<script type="text/javascript">
+
+// 			jQuery(document).ready( function( $ ) {
+
+// 				$( '#wsform-edit-values' ).click( function( e ) {
+// 					e.preventDefault();
+// 					$( this ).hide();
+// 					$( '#wsform-edit-values-div' ).toggleClass( 'wsform-hide' );
+// 				});
+
+// 				$( '.wf-input-change' ).change( function() {
+
+// 					var input_consts = $( '.wf-input-consts' );
+// 					var input_vars = $( '.wf-input-vars' );
+
+// 					var json = {};
+// 					var json_vars = {};
+
+// 					jQuery.each( input_consts, function() {
+// 						json[this.name] = this.value || '';
+// 					});
+
+// 					jQuery.each( input_vars, function() {
+// 						json_vars[this.name] = this.value || '';
+// 					});
+
+// 					json.wf_input = json_vars;
+
+// 					json_str = JSON.stringify( json );
+
+// 					$( '#_wsform_sub_entry' ).val( json_str );
+
+// 				});
+
+// 			});
+
+// 			//// Find our form in the DOM using its class name.
+// 			//const form = document.getElementByClassName('.contact-form')[0];
+// 			//
+// 			//// Get the form data with our (yet to be defined) function.
+// 			//const data = getFormDataAsJSON(form);
+// 			//
+// 			//// Do something with the email address.
+// 			//doSomething(data.email);
+
+// 		</script>
+
+// 	<?php
+
+// 	//echo '<pre>';
+// 	//print_r($post);
+// 	//echo '</pre>';
+// 	//return;
+
+
+
+// }

@@ -638,10 +638,10 @@ class WebbsitesFormSub extends WebbsitesForm
 		{
 			// insert into WP database
 			$args = array(
-				'post_author' => $this->daemon_id,
+				'post_author'   => $this->daemon_id,
 				'post_title' 	=> $this->sub_title,
 				'post_type' 	=> 'wsform_sub',
-				'post_status' => 'publish',
+				'post_status'   => 'publish',
                 'post_parent'   => $this->post_id,
 				'meta_input' 	=> array(
 									'_wsform_sub_wf_sender_email'   => $this->sub_wf_sender_email,
@@ -910,7 +910,7 @@ class WebbsitesFormSub extends WebbsitesForm
 	private function send_mail_receipts()
 	{
         // For offline development
-        return true;
+        // return true;
 
 		global $nl;
 

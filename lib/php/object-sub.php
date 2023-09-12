@@ -911,6 +911,7 @@ class WebbsitesFormSub extends WebbsitesForm
 	{
         // For offline development
         // return true;
+        // bw
 
 		global $nl;
 

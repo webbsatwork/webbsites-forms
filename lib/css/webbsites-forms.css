@@ -1,0 +1,766 @@
+
+
+@font-face {
+    font-family: 'Roboto Condensed';
+    src: url('../font/Roboto-Light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto Condensed';
+    src: url('../font/RobotoCondensed-Bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'entypo';
+    src: url('../font/entypo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+:root {
+  --wsform-dominant: #777;
+  /* --wsform-accent: #ccc; */
+  --wsform-text: #222;
+  --wsform-header: #777;
+  --wsform-background: #eee;
+  --wsform-field: #fff;
+  --wsform-field-border: transparent;
+  --wsform-field-border-width: 1px;
+  --wsform-field-border-radius: 0;
+  --wsform-required: #aaa;
+  --wsform-error: #c00;
+  --wsform-passed: #0a0;
+}
+
+
+
+
+
+div.wsform-body
+{
+	width:auto;
+	max-width: 100%;
+	margin: 0 auto 2em 0;
+    padding:1.5em;
+    background:var( --wsform-background )
+}
+
+
+
+div.wsform-body *
+{
+	background:none;
+	border:none;
+	bottom:auto;
+	box-sizing: border-box;
+	clear:none;
+	color: var( --wsform-text );
+	cursor:default;
+	float:none;
+	font: 400 11pt/1.5 Roboto Condensed, arial, verdana, helvetica, sans-serif;
+	font-style: normal;
+	height:auto;
+	left:auto;
+	letter-spacing:normal;
+	max-height:none;
+	max-width:none;
+	min-height:0;
+	min-width:0;
+	overflow:visible;
+	position:static;
+	right:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	top:auto;
+	vertical-align:baseline;
+	visibility:visible;
+	white-space:normal;
+	width:auto;
+	z-index:auto;
+}
+
+
+div.wsform-body em {font-style:italic}
+
+
+div.wsform-body *
+{
+	-webkit-transition: 0.3s all ease;
+	   -moz-transition: 0.3s all ease;
+	     -o-transition: 0.3s all ease;
+	        transition: 0.3s all ease;
+}
+
+div.wsform-body strong {font-weight:700;font-size:inherit}
+
+*:focus {outline: none !important;}
+
+div.wsform-body .webbsites-hide {display: none;}
+
+div.wsform-body h1.wsform-section-header, div.wsform-body h2.wsform-header, div.wsform-body h4.wsform-header, div.wsform-body h6.wsform-header
+{
+	font-size: 34pt;
+	font-weight: 700;
+	font-family: Roboto Condensed;
+	margin-top: 1em;
+	margin-right: 0;
+	margin-bottom: .5em;
+	margin-left: 0;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+	color: var( --wsform-header );
+	text-transform: none;
+	letter-spacing: normal;
+}
+
+div.wsform-body h1.wsform-section-header {padding: 0; margin: 1em 0 .5em; color: #000;}
+
+p.wsform-section-desc {font-size: 12pt;}
+
+div.wsform-body h2.wsform-header {font-size: 28pt;}
+div.wsform-body h4.wsform-header {font-size: 20pt;}
+div.wsform-body h6.wsform-header {font-size: 14pt; text-transform: uppercase; letter-spacing: 2px; font-style: normal;}
+
+div.wsform-body h1.wsform-section-header:before,
+div.wsform-body h2.wsform-header:before,
+div.wsform-body h4.wsform-header:before,
+div.wsform-body h6.wsform-header:before,
+div.wsform-body h1.wsform-section-header:after,
+div.wsform-body h2.wsform-header:after,
+div.wsform-body h4.wsform-header:after,
+div.wsform-body h6.wsform-header:after
+{display: none; content: none;}
+
+/*div.wsform-body span.wsform-h3*/
+/*{*/
+/*	font: bold 14pt/1 roboto condensed bold, arial black, verdana, helvetica, sans-serif;*/
+/*	display: block;*/
+/*	border-bottom: 1px solid #999;*/
+/*	color: #777;*/
+/*	text-transform: uppercase;*/
+/*	padding: 0 0 .2em;*/
+/*	margin: 0 0 .5em;*/
+/*}*/
+/**/
+/*div.wsform-body span.wsform-h3-note*/
+/*{*/
+/*	font: italic 10pt arial, verdana, helvetica, sans-serif;*/
+/*	text-transform: none;*/
+/*	color: #000;*/
+/*}*/
+
+
+
+div.wsform-body div.wsform-progress-bar {background-color:transparent}
+div.wsform-body div.wsform-progress-bar div.wsform-progress-bar-con {width: 100%; height: 10px; margin: 0 0 1em; padding: 0;background-color:transparent}
+div.wsform-body div.wsform-progress-bar div.wsform-progress-bar-con span.wsform-progress-bar-segment {display: block; float: left; margin: 0; padding: 0 2px; background-color:transparent}
+div.wsform-body div.wsform-progress-bar div.wsform-progress-bar-con span.wsform-progress-bar-segment span {display: block; width: 100%; height: 10px; background-color: #eee; text-decoration: none;}
+div.wsform-body div.wsform-progress-bar div.wsform-progress-bar-con span.wsform-progress-bar-segment.active span {background-color: #0f0;}
+
+
+div.wsform-body .wsform-section {overflow: visible; padding: 0 0 2em; display: none;}
+div.wsform-body .wsform-section.active {display: block;}
+div.wsform-body .wsform-section:last-of-type {padding: 0;}
+
+div.wsform-body .wsform-section-con {overflow: visible;}
+
+div.wsform-body .hidden {display: none;}
+
+div.wsform-body .wsform-line
+{
+  padding: 0;
+  margin: 0 0 1.2em;
+  position: relative
+}
+
+div.wsform-body .wsform-input-div
+{
+	width: 100%;
+	background: var( --wsform-field );
+	padding: 3px 0;
+	margin: 0;
+  border:var( --wsform-field-border-width ) solid var( --wsform-field-border );
+  border-radius:var( --wsform-field-border-radius );
+}
+
+/* div.wsform-body div.not-passed div.wsform-input-div {border-color:var( --wsform-required )} */
+/* div.wsform-body div.passed div.wsform-input-div {border-color:var( --wsform-passed )} */
+/* div.wsform-body div.has-error div.wsform-input-div {border-color:var( --wsform-error )} */
+
+div.wsform-body div.wsform-input-div.occupado {padding-top:25px}
+
+div.wsform-body div.wsform-input-div.file {padding:11px 0 0}
+
+div.wsform-body div.wsform-input-wrapper {padding:0 5px;position:relative}
+
+div.wsform-body div.wsform-input-div.yourname div.wsform-input-wrapper,
+div.wsform-body div.wsform-input-div.email div.wsform-input-wrapper,
+div.wsform-body div.wsform-input-div.url div.wsform-input-wrapper
+{padding:0 25px 0 5px}
+
+
+
+div.wsform-body .wsform-line:last-of-type {border-bottom: none;}
+
+
+/*.wsform-input-div.wsform-input-div-yourname,*/
+/*.wsform-input-div.wsform-input-div-youremail,*/
+/*.wsform-input-div.wsform-input-div-select,*/
+/*.wsform-input-div.wsform-input-div-date,*/
+/*.wsform-input-div.wsform-input-div-email,*/
+/*.wsform-input-div.wsform-input-div-tel,*/
+/*.wsform-input-div.wsform-input-div-time,*/
+/*.wsform-input-div.wsform-input-div-url,*/
+/*.wsform-input-div.wsform-input-div-textarea*/
+/*{padding: 0 7px;}*/
+
+
+div.wsform-body input[type="date"],
+div.wsform-body input[type="email"],
+div.wsform-body input[type="number"],
+div.wsform-body input[type="password"],
+div.wsform-body input[type="tel"],
+div.wsform-body input[type="text"],
+div.wsform-body input[type="time"],
+div.wsform-body input[type="url"],
+div.wsform-body textarea
+{
+	font: 700 14pt/1.5 Roboto Condensed, arial, helvetica, sans-serif;
+	color: var( --wsform-text );
+	padding: 0;
+	margin: 0;
+	background: transparent;
+	border: none;
+	position: relative;
+	z-index: 2;
+	opacity: 0;
+  width:100%;
+	height: auto;
+	display: block;
+}
+
+div.wsform-body .wsform-input-div.occupado input[type="date"],
+div.wsform-body .wsform-input-div.occupado input[type="email"],
+div.wsform-body .wsform-input-div.occupado input[type="number"],
+div.wsform-body .wsform-input-div.occupado input[type="password"],
+div.wsform-body .wsform-input-div.occupado input[type="tel"],
+div.wsform-body .wsform-input-div.occupado input[type="text"],
+div.wsform-body .wsform-input-div.occupado input[type="time"],
+div.wsform-body .wsform-input-div.occupado input[type="url"],
+div.wsform-body .wsform-input-div.occupado textarea
+{opacity: 1;}
+
+
+
+
+
+div.wsform-body span.wsform-label
+{
+  font: 700 14pt/1.5 Roboto Condensed, arial, helvetica, sans-serif;
+  opacity: 1;
+  padding: 0;
+  line-height: 1.3;
+  border: none;
+  margin: 0;
+  position: absolute;
+  top: 6px;
+  left: 7px;
+  z-index: 1;
+  color:var( --wsform-text )
+}
+
+div.wsform-body .wsform-label-checkbox,
+div.wsform-body .wsform-label-file,
+div.wsform-body .wsform-label-radio
+{position: static; padding: 0 25px 0 30px; margin: 0 0 10px;}
+
+/* .wsform-label.wsform-label-checkbox:before, */
+/* .wsform-label.wsform-label-file:before, */
+/* .wsform-label.wsform-label-radio:before */
+/* {display: block; font-family: entypo; color: #bbb; position: absolute; top: -1px; left: -34px} */
+
+/* .wsform-label.wsform-label-checkbox:before, .wsform-label.wsform-label-radio:before {content: 'W';}
+.wsform-label.wsform-label-file:before {content: 'h';} */
+
+div.wsform-body div.wsform-input-div.occupado span.wsform-label
+{
+  top: 8px;
+  left:7px;
+  font-size: 9pt;
+  color: #777
+}
+
+
+
+div.wsform-body ::-webkit-input-placeholder {opacity:0;color: #aaa; font-weight: 400; font-family: Roboto Condensed, arial, helvetica, sans-serif} /* Chrome/Opera/Safari */
+div.wsform-body ::-moz-placeholder {opacity:0;color: #aaa; font-weight: 400; font-family: Roboto Condensed, arial, helvetica, sans-serif} /* Firefox 19+ */
+div.wsform-body :-ms-input-placeholder {opacity:0;color: #aaa; font-weight: 400; font-family: Roboto Condensed, arial, helvetica, sans-serif} /* IE 10+ */
+div.wsform-body :-moz-placeholder {opacity:0;color: #aaa; font-weight: 400; font-family: Roboto Condensed, arial, helvetica, sans-serif} /* Firefox 18- */
+
+div.wsform-body :focus::-webkit-input-placeholder {opacity:1} /* Chrome/Opera/Safari */
+div.wsform-body :focus::-moz-placeholder {opacity:1} /* Firefox 19+ */
+div.wsform-body :focus:-ms-input-placeholder {opacity:1} /* IE 10+ */
+div.wsform-body :focus:-moz-placeholder {opacity:1} /* Firefox 18- */
+
+div.wsform-body :disabled::-webkit-input-placeholder {color: #eee} /* Chrome/Opera/Safari */
+div.wsform-body :disabled::-moz-placeholder {color: #eee} /* Firefox 19+ */
+div.wsform-body :disabled:-ms-input-placeholder {color: #eee} /* IE 10+ */
+div.wsform-body :disabled:-moz-placeholder {color: #eee} /* Firefox 18- */
+
+div.wsform-body div.has-error div.wsform-input-div {padding-bottom: 23px;}
+
+div.wsform-body div.has-error div.wsform-input-div ::-webkit-input-placeholder {color:var( --wsform-error )}
+div.wsform-body div.has-error div.wsform-input-div ::-moz-placeholder {color:var( --wsform-error )}
+div.wsform-body div.has-error div.wsform-input-div :-ms-input-placeholder {color:var( --wsform-error )}
+div.wsform-body div.has-error div.wsform-input-div :-moz-placeholder {color:var( --wsform-error )}
+
+div.wsform-body div.has-error div.wsform-input-div :focus::-webkit-input-placeholder {color:#aaa}
+div.wsform-body div.has-error div.wsform-input-div :focus::-moz-placeholder {color:#aaa}
+div.wsform-body div.has-error div.wsform-input-div :focus:-ms-input-placeholder {color:#aaa}
+div.wsform-body div.has-error div.wsform-input-div :focus:-moz-placeholder {color:#aaa}
+
+
+
+div.wsform-body div.wsform-input-div textarea {height: auto; resize: vertical;}
+
+div.wsform-body .wsform-input-div.checkbox .wsform-label, div.wsform-body .wsform-input-div.radio .wsform-label, div.wsform-body .wsform-input-div.file .wsform-label {top: 6px}
+
+div.wsform-body .wsform-submit-div {padding: 1em 0 0; text-align: center; width: 100%; margin: 0 auto}
+
+div.wsform-body .wsform-button {display: block; margin: 0 auto;}
+
+div.wsform-body input[type="submit"].wsform-button, div.wsform-body button.wsform-button, a.wsform-button
+{
+	color: var( --wsform-dominant );
+	font: 700 14pt Roboto Condensed, arial black, sans-serif;
+	padding: 20px 40px;
+	margin: 1em 0;
+	background: #fff;
+	border: 1px solid var( --wsform-dominant );
+	border-radius: 5px;
+	-webkit-appearance: none;
+    appearance: none;
+	text-align: center;
+	cursor:pointer
+}
+
+div.wsform-body input[type="submit"].wsform-button.small,
+div.wsform-body button.wsform-button.small, a.wsform-button.small
+{
+    padding:.5rem 1rem;
+}
+
+
+div.wsform-body input[type="submit"].wsform-button:hover, div.wsform-body button.wsform-button:hover, div.wsform-body a.wsform-button:hover {background: var( --wsform-dominant ); color: #fff}
+div.wsform-body input[type="submit"].wsform-button:active, div.wsform-body button.wsform-button:active, div.wsform-body a.wsform-button:active {background: var( --wsform-dominant ); color: #fff}
+
+div.wsform-body input[type="submit"].wsform-button.align-full, div.wsform-body button.wsform-button.align-full, div.wsform-body a.wsform-button.align-full {width:100%}
+div.wsform-body input[type="submit"].wsform-button.align-center, div.wsform-body button.wsform-button.align-center, div.wsform-body a.wsform-button.align-center {margin: 1em auto}
+div.wsform-body input[type="submit"].wsform-button.align-left, div.wsform-body button.wsform-button.align-left, div.wsform-body a.wsform-button.align-left {margin: 1em auto 1em 1em}
+div.wsform-body input[type="submit"].wsform-button.align-right, div.wsform-body button.wsform-button.align-right, div.wsform-body a.wsform-button.align-right {margin: 1em 0 1em auto}
+
+
+div.wsform-body input[type="submit"]:disabled.wsform-button,
+div.wsform-body button:disabled.wsform-button,
+a:disabled.wsform-button,
+*:disabled.wsform-button
+{
+	border-color: #aaa;
+	color: #aaa;
+	background: transparent;
+}
+
+div.wsform-body div.wsform-submit-div span.wsform-submit-span {max-width: 400px;}
+div.wsform-body div.wsform-submit-div.has-sections span.wsform-submit-span {max-width: none;}
+
+div.wsform-body div.wsform-submit-div.has-sections input.wsform-button {max-width: none;}
+div.wsform-body div.wsform-submit-div.has-sections span.wsform-prev-span, div.wsform-body div.wsform-submit-div.has-sections span.wsform-submit-span, div.wsform-body div.wsform-submit-div.has-sections span.wsform-next-span {float: left; padding: 0 3px;}
+div.wsform-body div.wsform-submit-div.has-sections span.wsform-submit-span {width: 60%;}
+div.wsform-body span.wsform-prev-span, div.wsform-body span.wsform-next-span {width: 20%;}
+
+div.wsform-body input[type="submit"].wsform-button.wsform-button-busy,
+div.wsform-body input[type="submit"].wsform-button.wsform-button-busy:hover
+{
+	border-color: #999;
+	color: #999;
+	background-color: transparent;
+}
+
+div.wsform-body .required-input-field .wsform-input-wrapper::after {content: '\e090'; color: var( --wsform-required ); position: absolute; top: 8px; right: -16px; font-size: 8pt; font-family: entypo; line-height: 1;}
+div.wsform-body .required-input-field.has-error .wsform-input-wrapper::after {font-family: entypo; content: 'C'; color: var( --wsform-error )}
+div.wsform-body .required-input-field.passed .wsform-input-wrapper::after {content: '\e09d'; color:var( --wsform-passed )}
+
+div#wsform-error-msg
+{
+    margin:0 0 1rem;
+    padding:0;
+    color:var(--wsform-error );
+    font-weight:bold;
+    font-size:14pt
+}
+
+
+
+div.wsform-body .err-msg {display: block; padding: 0; font: 700 10pt/1 bold Roboto Condensed, arial, sans-serif; color: var( --wsform-error ); position: absolute; bottom: 5px; left: 7px}
+div.wsform-body .err-msg:before {font-family: entypo; content: '\e07a'; color: var( --wsform-error ); margin-right: 3px; vertical-align: -2px; font-size: 10pt;}
+
+div.wsform-body div.wsform-body label {cursor: pointer;}
+
+div.wsform-body .wsform-button-label {display: block;}
+
+
+/* File Input */
+div.wsform-body div.wsform-file-input-area {padding:0;margin:1em 0 0}
+
+div.wsform-body .wsform-file-input-table {margin:0;padding:0}
+
+div.wsform-body .wsform-file-input-table td
+{
+	vertical-align: top;
+	border: none;
+	padding: 0 5px 0 0;
+}
+
+div.wsform-body .wsform-file-input-list, div.wsform-body .wsform-file-input-errors
+{
+	margin: 0;
+	padding: 1em 0 0;
+	list-style-type: none;
+}
+
+div.wsform-body .wsform-file-input-list li, div.wsform-body .wsform-file-input-errors li
+{
+	position: relative;
+	margin: 12px 0 0;
+	list-style-type: none;
+	padding: 10px 35px 10px 60px;
+}
+
+div.wsform-body ul.wsform-file-input-list, div.wsform-body ul.wsform-file-input-errors {margin:0;padding:0}
+
+div.wsform-body .wsform-file-input-list li {background: #eee;}
+
+div.wsform-body .wsform-file-input-list li:before,
+div.wsform-body .wsform-file-input-errors li:before
+{
+	font-family: entypo;
+	font-size: 14pt;
+	position: absolute;
+	top: 6px;
+	left: 35px;
+}
+
+div.wsform-body .wsform-file-input-list li:before
+{
+	content: "%";
+	color: var( --wsform-dominant );
+}
+
+div.wsform-body .wsform-file-input-errors li:before
+{
+	content: "C";
+	color: var( --wsform-error );
+}
+
+div.wsform-body .wsform-file-input-list li.wsform-uploading:after,
+div.wsform-body .wsform-file-input-list li.wsform-uploaded:after,
+div.wsform-body .wsform-remove-upload:before
+{
+	font-family: entypo;
+	position: absolute;
+	font-size: 15pt;
+	top: 6px;
+	left: 8px;
+}
+
+
+div.wsform-body .wsform-file-input-list li.wsform-uploading:after
+{
+	content: "g";
+	color: #999;
+	-webkit-animation: uploading-rotation 2s infinite linear;
+	-moz-animation: uploading-rotation 2s infinite linear;
+	-o-animation: uploading-rotation 2s infinite linear;
+	animation: uploading-rotation 2s infinite linear;
+}
+
+
+div.wsform-body .wsform-file-input-list li.wsform-uploaded:after
+{
+	content: "W";
+	color: #070;
+}
+
+div.wsform-body .wsform-file-input-list li.wsform-deleting {opacity: .5;}
+
+div.wsform-body .wsform-remove-upload:before
+{
+	right: 10px;
+	left: auto;
+	content: "B";
+	color: #bbb;
+	cursor: pointer;
+}
+
+
+div.wsform-body .wsform-remove-upload:hover:before
+{
+	color: #700;
+}
+
+
+@-webkit-keyframes uploading-rotation
+{
+		from { -webkit-transform: rotate(0deg); }
+		  to { -webkit-transform: rotate(-359deg); }
+}
+
+@-moz-keyframes uploading-rotation
+{
+		from { -webkit-transform: rotate(0deg); }
+		  to { -webkit-transform: rotate(-359deg); }
+}
+
+@-o-keyframes uploading-rotation
+{
+		from { -webkit-transform: rotate(0deg); }
+		  to { -webkit-transform: rotate(-359deg); }
+}
+
+@keyframes uploading-rotation
+{
+		from { -webkit-transform: rotate(0deg); }
+		  to { -webkit-transform: rotate(-359deg); }
+}
+
+
+.wsform-upload-filename {font-weight: 700;}
+.wsform-upload-meta {font-weight: 400; font-style: italic;}
+
+div.wsform-body .wsform-file-input-button
+{
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+div.wsform-body .wsform-file-input-button + span {display: block;}
+
+div.wsform-body .wsform-file-input-button + span label
+{
+    font: 700 10pt Roboto Condensed, sans-serif;
+    color: #fff;
+    background-color: var( --wsform-dominant );
+	border: 1px solid var( --wsform-dominant );
+	padding: 6px 6px 6px 30px;
+	border-radius: 5px;
+    display: inline-block;
+	cursor: pointer;
+	text-transform: none;
+	letter-spacing: 0;
+	position: relative;
+}
+
+div.wsform-body .wsform-file-input-button + span label:before
+{
+	content: '\e0b1';
+	font-family: entypo;
+	margin: 0;
+	position: absolute;
+	top: 5px;
+	left: 10px;
+}
+
+
+div.wsform-body .wsform-file-input-button + span label:hover
+{
+    background-color: #fff;
+    color: var( --wsform-dominant );
+}
+
+
+/* The container */
+div.wsform-body .wsform-button-label {display: block; position: relative; padding: 0 0 0 28px; margin: 3px 0 7px; cursor: pointer;  -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+div.wsform-body .wsform-button-label:last-of-type {margin: 3px 0 0;}
+
+/* Hide the browser's default checkbox */
+div.wsform-body .wsform-button-label input.wsform-checkbox, div.wsform-body .wsform-button-label input.wsform-radio-button {position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; display: none;}
+
+/* Create a custom checkbox */
+div.wsform-body .wsform-checkmark, div.wsform-body .wsform-radio-button-span {position: absolute; top: 0; left: 0; height: 20px; width: 20px; background-color: #fff; border: 1px solid #aaa;}
+div.wsform-body .wsform-radio-button-span {border-radius: 20px;}
+
+/* On mouse-over, add a grey background color */
+div.wsform-body .wsform-button-label:hover input ~ .wsform-checkmark, div.wsform-body .wsform-button-label:hover input ~ .wsform-radio-button-span {background-color: #aaa;}
+
+/* Style the checkmark/radio containers when focused */
+/*.wsform-button-label:focus {background: #ddd;}*/
+div.wsform-body .wsform-button-label:focus .wsform-checkmark, div.wsform-body .wsform-button-label:focus .wsform-radio-button-span {border-color: var( --wsform-dominant )}
+
+/* When the checkbox is checked, add a color background */
+div.wsform-body .wsform-button-label input:checked ~ .wsform-checkmark, div.wsform-body .wsform-button-label input:checked ~ .wsform-radio-button-span {background-color: var( --wsform-dominant ); border-color: var( --wsform-dominant )}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+div.wsform-body .wsform-checkmark:after {content: ""; position: absolute; display: none;}
+div.wsform-body .wsform-radio-button-span:after {content: ""; position: absolute; display: none;}
+
+/* Show the checkmark when checked */
+div.wsform-body .wsform-button-label input:checked ~ .wsform-checkmark:after, div.wsform-body .wsform-button-label input:checked ~ .wsform-radio-button-span:after {display: block;}
+
+/* Style the checkmark/indicator */
+div.wsform-body .wsform-button-label .wsform-checkmark:after {content: "W"; font-size: 12pt; color: #fff; font-family: entypo; left: 2px; top: -3px;}
+div.wsform-body .wsform-button-label .wsform-radio-button-span:after {left: 5px; top: 5px; width: 8px; height: 8px; border: none; background: #fff; border-radius: 8px;}
+
+
+div.wsform-body .wsform-select-field.wsform-input {position: relative; z-index: +1;}
+
+div.wsform-body div.wsform-select-container {position:relative;}
+div.wsform-body div.wsform-select-container::before {position:absolute; content: "\2e"; font-size: 12pt; color: #aaa; font-family: entypo; right: 2px; top: 2px;}
+
+/*div.wsform-body .wsform-input-div .wsform-input,
+div.wsform-body .wsform-input-div textarea
+{padding-left: 30px;}
+*/
+/* div.wsform-body div.wsform-input-div:before
+{display: block; font-family: entypo; font-size: 12pt; color: #ccc; position: absolute; top: 5px; right: 7px}
+
+div.wsform-body div.occupado:before {top:27px} */
+
+/* div.wsform-body .wsform-input-div.checkbox:before, */
+/* div.wsform-body .wsform-input-div.file:before, */
+/* div.wsform-body .wsform-input-div.radio:before {content: none;} */
+
+div.wsform-body div.wsform-input-wrapper::before
+{display: block; font-family: entypo; font-size: 12pt; color: #ccc; position: absolute; top: 1px; right: 5px}
+
+div.wsform-body .wsform-input-div.yourname div.wsform-input-wrapper::before {content: "\e0b3";}
+div.wsform-body .wsform-input-div.email div.wsform-input-wrapper::before {content: "\e046"}
+div.wsform-body .wsform-input-div.url div.wsform-input-wrapper::before {content: "\e013"}
+
+div.wsform-body .wsform-input-wrapper {padding: 0 5px 0 8px;}
+
+div.wsform-body .wsform-input-div.file .wsform-input-wrapper {padding-bottom: .5em}
+div.wsform-body .wsform-input-div.checkbox .wsform-input-wrapper, div.wsform-body .wsform-input-div.radio .wsform-input-wrapper, div.wsform-body .wsform-input-div.file .wsform-input-wrapper {padding-top: .8em;}
+
+
+div.wsform-body .wsform-input-list
+{
+	overflow: hidden;
+	padding: 0;
+	margin: 17px 0 4px;
+}
+
+
+div.wsform-body .wsform-select-div-wrapper
+{
+	width: 100%;
+	max-height: 0px;
+	z-index: +3;
+	position: absolute;
+	left: 0;
+	overflow: auto;
+}
+
+div.wsform-body .wsform-select-div-wrapper.display {max-height: 166px; border: 1px solid #aaa; overflow-y: scroll; overflow-x: hidden;}
+
+div.wsform-body .wsform-select-div
+{
+	width: 100%;
+	background: #fff;
+}
+
+div.wsform-body .wsform-select-option
+{
+	display: block;
+	padding: 6px;
+	cursor: pointer;
+    background: #fff;
+}
+
+div.wsform-body .wsform-select-option:hover {background: var( --wsform-dominant ) !important; color: #fff;}
+
+div.wsform-body .wsform-select-option:nth-child(even) {background: #ddd;}
+
+div.wsform-body .wsform-err-msg {font-size: 8pt; color: #a00; display: block; margin: 3px 0 0;}
+
+div.wsform-body p.wsform-status {display: none; margin: 2em 0 0; padding: 0; font: 700 14pt/1 Roboto Condensed, arial, helvetica, sans-serif;text-align: center}
+div.wsform-body p.wsform-status.wsform-info {display: block;}
+div.wsform-body p.wsform-status.wsform-error {display: block; color: #a00;}
+div.wsform-body p.wsform-status.wsform-success {display: block; color: var( --wsform-passed );}
+
+div.wsform-body .wsform-hide {display: none;}
+
+
+/* SKINS */
+/* Orange */
+/* #ff7f50 */
+/*div.wsform-body.orange {background: #ff7f50;}*/
+
+
+/* Gray */
+
+
+
+/* Popup Dialogs */
+div.wsform-popup-wrapper
+{
+    position:fixed;
+    width:100vw;
+    height:calc( 100vh - 32px );
+    top:32px;
+    left:0;
+    z-index:10000;
+}
+
+div#wsform-popup-bg
+{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba( 0,0,0,.2 );
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div#wsform-popup-dialog-box
+{
+	font: 700 14pt/1.5 Roboto Condensed, arial, verdana, helvetica, sans-serif;
+    background:#fff;
+    box-shadow: 0 0 5px rgba(0,0,0,.2);
+    border-radius:10px;
+    padding:2rem;
+    margin:2rem;
+    position: relative;
+}
+
+div#wsform-popup-dialog-box p
+{
+	font: 400 14pt/1.5 Roboto Condensed, arial, verdana, helvetica, sans-serif;
+    margin: 0 0 1rem;
+}
+
+div#wsform-popup-dialog-box p:last-of-type {margin:0}
+
+div#wsform-popup-dialog-box button.wsform-button {margin:1.5rem auto 0}
+
+
+
+div#wsform-popup-dialog-box h1 {text-align:center;margin:0 0 2rem}
+div#wsform-popup-dialog-box p {text-align:center}

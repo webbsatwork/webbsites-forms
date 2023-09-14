@@ -50,7 +50,7 @@ class WebbsitesFormSub extends WebbsitesForm
 		*/
 
 		// Populate several properties
-		$this->form_input_types = $this::form_input_types();
+		// $this->form_input_types = $this::form_input_types();
 		$this->form_parameters  = $this::form_parameters();
 
 		// Get the submission info
@@ -584,11 +584,11 @@ class WebbsitesFormSub extends WebbsitesForm
 
 
 	// PUBLIC FORM SUBMISSIONS
-	function form_submit( $post )
+	public function form_submit( $post )
 	{
 		// Populate several properties
-		$this->set_form_constants();
-		$this->form_input_types = $this::form_input_types();
+		// $this->set_form_constants();
+		// $this->form_input_types = $this::form_input_types();
 		$this->form_parameters  = $this::form_parameters();
 
         // If no data, throw an error

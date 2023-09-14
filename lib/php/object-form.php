@@ -104,6 +104,7 @@ class WebbsitesForm
 	function __construct( $post_id = null )
 	{
         $this->set_app_options();
+        $this->form_input_types();
 
         // If form_id supplied, get the form
         if( $post_id != null ) $this->wsform( [ 'post_id' => $post_id ] );
@@ -205,8 +206,8 @@ class WebbsitesForm
 		// Populate several properties
 		// $this->form_constants();
 		// $this->form_options();
-        $this->set_form_constants();
-		$this->form_input_types = $this::form_input_types();
+        // $this->set_form_constants();
+		// $this->form_input_types = $this::form_input_types();
 		$this->form_parameters  = $this::form_parameters();
 
 		// If requested by form id
@@ -952,9 +953,9 @@ class WebbsitesForm
 
 
 
-	static function form_input_types()
+	private function form_input_types()
 	{
-		return array(
+		$this->form_input_types = [
 			"checkbox" 	=> "Checkboxes",
 			"date" 		=> "Date Field",
 			"select" 	=> "Dropdown Menu",
@@ -972,7 +973,7 @@ class WebbsitesForm
 			"textarea" 	=> "Textarea",
 			"time" 		=> "Time Field",
 			"url" 		=> "Web Address",
-		);
+        ];
 
 	}
 
@@ -2259,7 +2260,7 @@ endif;
 	{
 		// FORM ELEMENTS
 		// get the input types for the dropdown menu
-		$input_types = $this::form_input_types();
+		$input_types = $this->form_input_types;
 
 		?>
 

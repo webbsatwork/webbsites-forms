@@ -238,10 +238,9 @@ function wsform_form_submit( $post, $files )
 function wsform_display_sub( $sub_id )
 {
 	// New instance
-	$wfs = new WebbsitesFormSub();
-	
 	// Get the submission info
-	$wfs->webbsitesform_sub( $sub_id );
+	$wfs = new WebbsitesFormSub( $sub_id );
+	// $wfs->webbsitesform_sub( $sub_id );
 	
 	// Display it
 	$wfs->display_sub();

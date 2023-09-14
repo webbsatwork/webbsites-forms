@@ -42,37 +42,37 @@ function wsform_setup_form_plugin()
 	//wsform_options();
 	$wf = new WebbsitesForm();
 
-    $options = $wf->opt_vals;
+    // $options = $wf->opt_vals;
 
 	// default forms email sender
-	if( $options->default_sender == '' )
+	if( $wf->default_sender == '' )
 	{
-		$options->default_sender = 'no-reply@' . $_SERVER['SERVER_NAME'];
+		$wf->default_sender = 'no-reply@' . $_SERVER['SERVER_NAME'];
 		update_option( '_wsform_opt_from_email', $options->default_sender );
 	}
 
 	// default honeypot id
-	if( $options->honeypot_id == '' )
+	if( $wf->honeypot_id == '' )
 	{
-		$options->honeypot_id = 'wf_url';
-		update_option( '_wsform_opt_honeypot_id', $options->honeypot_id );
+		$wf->honeypot_id = 'wf_url';
+		update_option( '_wsform_opt_honeypot_id', $wf->honeypot_id );
 	}
 
 	// DEFINE CONSTANTS
 	// save user_id constant
-	define( 'WSFORM_USER', $options->daemon_id );
+	define( 'WSFORM_USER', $wf->daemon_id );
 
 	// default forms email
 	define( 'WSFORM_DEFAULT_FORMS_EMAIL', 'forms@webbsatwork.com' ); // for system email daemon, if real user isn't chosen
 
 	// set constant for email sender
-	define( 'WSFORM_EMAIL_FROM', $options->default_sender );
+	define( 'WSFORM_EMAIL_FROM', $wf->default_sender );
 
 	// set constant for email sender
-	define( 'WSFORM_HONEYPOT_ID', $options->honeypot_id );
+	define( 'WSFORM_HONEYPOT_ID', $wf->honeypot_id );
 
 	//// set constant for email sender
-	//define( 'WSFORM_SSL_KEY', $options->openssl_key );
+	//define( 'WSFORM_SSL_KEY', $wf->openssl_key );
 
 	// constant for path to forms folder
 	define( 'WSFORM_SITE_HOME_DIR', get_home_path() );

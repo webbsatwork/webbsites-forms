@@ -55,24 +55,24 @@ class WebbsitesForm
 	public $save_email_responses;
 
 	// Options
-    public $opt_names;
-    public $opt_vals;
+    // public $opt_names;
+    // public $opt_vals;
 
-	// public $daemon_id;
-	// public $default_sender;
-	// public $default_recipient;
-    // public $default_success_msg;
-    // public $default_error_msg;
-	// public $mx_email;
-	// public $honeypot_id;
-	// public $dominant_color;
-	// public $text_color;
-	// public $header_color;
-	// public $background_color;
-	// public $field_color;
-	// public $field_border_color;
-	// public $field_border_width;
-	// public $field_border_radius;
+	public $daemon_id;
+	public $default_sender;
+	public $default_recipient;
+    public $default_success_msg;
+    public $default_error_msg;
+	public $mx_email;
+	public $honeypot_id;
+	public $dominant_color;
+	public $text_color;
+	public $header_color;
+	public $background_color;
+	public $field_color;
+	public $field_border_color;
+	public $field_border_width;
+	public $field_border_radius;
 
 	// Paths
 	public $path_to_plugin;
@@ -103,8 +103,8 @@ class WebbsitesForm
 	// Constructor
 	function __construct( $post_id = null )
 	{
-        $this->set_app_options();
         $this->form_input_types();
+        $this->settings();
 
         // If form_id supplied, get the form
         if( $post_id != null ) $this->wsform( [ 'post_id' => $post_id ] );
@@ -115,7 +115,35 @@ class WebbsitesForm
 
 
 
-    private function set_app_options()
+    private function check_initial_setup()
+    {
+        // If initial setup hasn't been completed, run it
+        $initial_setup_status = get_option( '_wsform_opt_initial_setup_complete' );
+
+        if( $initial_setup_status !== true )
+        {
+            add_option( '_wsform_opt_initial_setup_complete', true );
+            add_option( '_wsform_opt_daemon_id', 'wf' );
+            add_option( '_wsform_opt_default_sender', 'no-reply@' . $_SERVER['SERVER_NAME'] );
+            add_option( '_wsform_opt_default_recipient', get_option( 'admin_email' ) );
+            add_option( '_wsform_opt_default_success_message', 'Your message was successfully sent!' );
+            add_option( '_wsform_opt_default_error_message', 'Sorry, there was a problem.' );
+            add_option( '_wsform_opt_mx_email', null );
+            add_option( '_wsform_opt_honeypot_id', 'wsform_url' );
+            add_option( '_wsform_opt_dominant_color', 'rgb(68, 68, 68)' );
+            add_option( '_wsform_opt_text_color', 'rgb(34, 34, 34)' );
+            add_option( '_wsform_opt_header_color', 'rgb(119, 119, 119)' );
+            add_option( '_wsform_opt_background_color', 'rgb(238, 238, 238)' );
+            add_option( '_wsform_opt_field_color', 'rgb(255, 255, 255)' );
+            add_option( '_wsform_opt_field_border_color', 'rgba(0, 0, 0)' );
+            add_option( '_wsform_opt_field_border_width', '1px' );
+            add_option( '_wsform_opt_field_border_radius', '5' );
+        }
+    }
+
+
+
+    private function settings()
     {
         // Set settings data
         $this->settings_prefix 		= 'wsform-form';
@@ -123,32 +151,30 @@ class WebbsitesForm
 		$this->server_name          = $_SERVER['SERVER_NAME'];
 		$this->site_name            = get_bloginfo( 'name' );
         
-        // Set Options With Initial Defaults
-        $this->opt_names = new stdClass();
+        // Get Options
+        $this->daemon_id            = get_option( '_wsform_opt_daemon_id' );
+        $this->default_sender       = get_option( '_wsform_opt_default_sender' );
+        $this->default_recipient    = get_option( '_wsform_opt_default_recipient' );
+        $this->default_success_msg  = get_option( '_wsform_opt_default_success_message' );
+        $this->default_error_msg    = get_option( '_wsform_opt_default_error_message' );
+        $this->mx_email             = get_option( '_wsform_opt_mx_email' );
+        $this->honeypot_id          = get_option( '_wsform_opt_honeypot_id' );
+        $this->dominant_color       = get_option( '_wsform_opt_dominant_color' );
+        $this->text_color           = get_option( '_wsform_opt_text_color' );
+        $this->header_color         = get_option( '_wsform_opt_header_color' );
+        $this->background_color     = get_option( '_wsform_opt_background_color' );
+        $this->field_color          = get_option( '_wsform_opt_field_color' );
+        $this->field_border_color   = get_option( '_wsform_opt_field_border_color' );
+        $this->field_border_width   = get_option( '_wsform_opt_field_border_width' );
+        $this->field_border_radius  = get_option( '_wsform_opt_field_border_radius' );
 
-        $this->opt_names->daemon_id            = array( '_wsform_opt_daemon_id',                'wf' );
-        $this->opt_names->default_sender       = array( '_wsform_opt_default_sender',           'no-reply@' . $_SERVER['SERVER_NAME'] );
-        $this->opt_names->default_recipient    = array( '_wsform_opt_default_recipient',        get_option( 'admin_email' ) );
-        $this->opt_names->default_success_msg  = array( '_wsform_opt_default_success_message',  'Your message was successfully sent!' );
-        $this->opt_names->default_error_msg    = array( '_wsform_opt_default_error_message',    'Sorry, there was a problem.' );
-        $this->opt_names->mx_email             = array( '_wsform_opt_mx_email',                 null );
-        $this->opt_names->honeypot_id          = array( '_wsform_opt_honeypot_id',              'wsform_url' );
-        $this->opt_names->dominant_color       = array( '_wsform_opt_dominant_color',           'rgb(68, 68, 68)' );
-        $this->opt_names->text_color           = array( '_wsform_opt_text_color',               'rgb(34, 34, 34)' );
-        $this->opt_names->header_color         = array( '_wsform_opt_header_color',             'rgb(119, 119, 119)' );
-        $this->opt_names->background_color     = array( '_wsform_opt_background_color',         'rgb(238, 238, 238)' );
-        $this->opt_names->field_color          = array( '_wsform_opt_field_color',              'rgb(255, 255, 255)' );
-        $this->opt_names->field_border_color   = array( '_wsform_opt_field_border_color',       'rgba(0, 0, 0, 0)' );
-        $this->opt_names->field_border_width   = array( '_wsform_opt_field_border_width',       '1px' );
-        $this->opt_names->field_border_radius  = array( '_wsform_opt_field_border_radius',      5 );
+        // // Set all options
+        // $this->opt_vals = new stdClass();
 
-        // Set all options
-        $this->opt_vals = new stdClass();
-
-        foreach( $this->opt_names as $key => $arr )
-        {
-            $this->opt_vals->$key = get_option( $arr[0], $arr[1] );
-        }
+        // foreach( $this->opt_names as $key => $arr )
+        // {
+        //     $this->opt_vals->$key = get_option( $arr[0], $arr[1] );
+        // }
 
         // print_array( $this->opt_vals );
 
@@ -433,9 +459,9 @@ class WebbsitesForm
 		$page_uri = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 		// Get the default success and error messages
-        $opts = $this->opt_vals;
-		$success_msg = ! empty( $this->form_success_message ) ? $this->form_success_message : $opts->default_success_msg;
-		$error_msg = ! empty( $this->form_error_message ) ? $this->form_error_message : $opts->default_error_msg;
+        // $opts = $this->opt_vals;
+		$success_msg = ! empty( $this->form_success_message ) ? $this->form_success_message : $this->default_success_msg;
+		$error_msg = ! empty( $this->form_error_message ) ? $this->form_error_message : $this->default_error_msg;
 
 		?>
 
@@ -857,12 +883,12 @@ class WebbsitesForm
 
 	function form_end()
 	{
-        $opt = $this->opt_vals;
+        // $opt = $this->opt_vals;
 		?>
-				<div id="<?php echo $opt->honeypot_id ?>" class="wsform-line">
+				<div id="<?php echo $this->honeypot_id ?>" class="wsform-line">
 					<div class="wsform-input-div">
 						<div class="wsform-label">Leave Empty</div>
-						<input id="<?php echo $opt->honeypot_id ?>-input" class="wsform-input" name="<?php echo $opt->honeypot_id ?>" type="text" placeholder="Leave Empty" data-field-desc="url-input" />
+						<input id="<?php echo $this->honeypot_id ?>-input" class="wsform-input" name="<?php echo $opt->honeypot_id ?>" type="text" placeholder="Leave Empty" data-field-desc="url-input" />
 					</div>
 				</div>
 
@@ -880,8 +906,14 @@ class WebbsitesForm
 					<?php if( $this->section_count > 0 ) : ?>
 					<span class="wsform-prev-span"><button class="wsform-button wsform-previous-section wsform-hidden-button">&lt;</button></span>
 					<?php endif ?>
-					<span class="wsform-submit-span"><input<?php if( $this->section_count > 0 ) echo ' disabled="yes"' ?> class="wsform-button wsform-submit wsform-submit-button anim <?php echo $this->button_align ?> <?php if( ! empty( $this->button_css_class ) ) echo ' ' . $this->button_css_class ?>" <?php if( ! empty( $this->button_css_id ) ) echo 'id="' . $this->button_css_id . '" ' ?>name="wf_submit" type="submit" value="<?php echo $this->button_label; ?>" /></span>
-					<?php if( $this->section_count > 0 ) : ?><span class="wsform-next-span"><button class="wsform-button wsform-next-section">&gt;</button></span><?php endif ?>
+					<span class="wsform-submit-span">
+                        <input<?php if( $this->section_count > 0 ) echo ' disabled="yes"' ?> class="wsform-button wsform-submit wsform-submit-button anim <?php echo $this->button_align ?> <?php if( ! empty( $this->button_css_class ) ) echo ' ' . $this->button_css_class ?>" <?php if( ! empty( $this->button_css_id ) ) echo 'id="' . $this->button_css_id . '" ' ?>name="wf_submit" type="submit" value="<?php echo $this->button_label; ?>" />
+                    </span>
+					<?php if( $this->section_count > 0 ) : ?>
+                        <span class="wsform-next-span">
+                            <button class="wsform-button wsform-next-section">&gt;</button>
+                        </span>
+                    <?php endif ?>
 				</div>
 
         </form>

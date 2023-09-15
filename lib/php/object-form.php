@@ -89,7 +89,7 @@ class WebbsitesForm
 	public $site_name;
 	public $form_parameters;
 	public $form_input_types;
-    public $weekdays;
+    // public $weekdays;
 
     public $error = false;
     public $error_msg = '';
@@ -103,26 +103,24 @@ class WebbsitesForm
 	// Constructor
 	function __construct( $post_id = null )
 	{
-        $this->form_input_types();
+        $this->check_initial_setup();
+        // $this->form_input_types();
         $this->settings();
 
         // If form_id supplied, get the form
         if( $post_id != null ) $this->wsform( [ 'post_id' => $post_id ] );
-
-        // Set the weekdays
-        $this->weekdays = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
 	}
 
 
 
     private function check_initial_setup()
     {
-        // If initial setup hasn't been completed, run it
-        $initial_setup_status = get_option( '_wsform_opt_initial_setup_complete' );
+        // $initial_setup = get_option( '_wsform_opt_initial_setup' );
 
-        if( $initial_setup_status !== true )
+        // If initial setup hasn't been completed, run it
+        if( ! get_option( '_wsform_opt_initial_setup' ) )
         {
-            add_option( '_wsform_opt_initial_setup_complete', true );
+            add_option( '_wsform_opt_initial_setup', true );
             add_option( '_wsform_opt_daemon_id', 'wf' );
             add_option( '_wsform_opt_default_sender', 'no-reply@' . $_SERVER['SERVER_NAME'] );
             add_option( '_wsform_opt_default_recipient', get_option( 'admin_email' ) );
@@ -181,7 +179,32 @@ class WebbsitesForm
     }
 
 
-	// function form_options()
+    static function register_settings()
+    {
+        return;
+        global $wsf;
+    
+        //register our settings
+        register_setting( $wsf->settings_groupname, '_wsform_opt_daemon_id' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_default_sender' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_default_recipient' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_default_success_message' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_default_error_message' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_mx_email' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_honeypot_id' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_dominant_color' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_text_color' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_header_color' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_background_color' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_field_color' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_field_border_color' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_field_border_width' );
+        register_setting( $wsf->settings_groupname, '_wsform_opt_field_border_radius' );
+    }
+    
+    
+    
+        // function form_options()
 	// {
 	// 	$this->daemon_id			= get_option( '_wsform_opt_daemon_id' );
 	// 	$this->default_sender		= get_option( '_wsform_opt_default_sender' );
@@ -232,7 +255,7 @@ class WebbsitesForm
 		// Populate several properties
 		// $this->form_constants();
 		// $this->form_options();
-        // $this->set_form_constants();
+        $this->set_form_constants();
 		// $this->form_input_types = $this::form_input_types();
 		$this->form_parameters  = $this::form_parameters();
 
@@ -985,9 +1008,9 @@ class WebbsitesForm
 
 
 
-	private function form_input_types()
+	static function form_input_types()
 	{
-		$this->form_input_types = [
+		return [
 			"checkbox" 	=> "Checkboxes",
 			"date" 		=> "Date Field",
 			"select" 	=> "Dropdown Menu",
@@ -2292,7 +2315,7 @@ endif;
 	{
 		// FORM ELEMENTS
 		// get the input types for the dropdown menu
-		$input_types = $this->form_input_types;
+		$input_types = $this::form_input_types();
 
 		?>
 
@@ -2601,7 +2624,7 @@ endif;
 
         $input = (array) json_decode( base64_decode( $enc_data ) );
 
-        $weekdays = $this->weekdays;
+        $weekdays = $this::weekdays();
 
         $vis_tbl_classes = 'wsform-display-visibility-table';
 
@@ -2922,7 +2945,7 @@ endif;
 		// Join the two arrays; add defaults if they're not set in the parameters
 		$att_keys = array_keys( $atts );
 
-		$input_types = $this->form_input_types;
+		$input_types = $this::form_input_types();
 
 		foreach( $a as $key => $val )
 			if( ! in_array( $key, $att_keys ) ) $atts[$key] = $val;
@@ -3572,14 +3595,14 @@ endif;
 	{
         global $wsf;
 
-        $opt = $wsf->opt_vals;
+        // $opt = $wsf->opt_vals;
 
-		$return  = '<style type="text/css">:root {--wsform-dominant: ' . $opt->dominant_color
-			. ';--wsform-text: ' . $opt->text_color . ';--wsform-header: ' . $opt->header_color 
-            . ';--wsform-background: ' . $opt->background_color . ';--wsform-field: ' . $opt->field_color 
-            . ';--wsform-field-border: ' . $opt->field_border_color . ';--wsform-field-border-width: ' 
-            . $opt->field_border_width . ';--wsform-field-border-radius: ' . $opt->field_border_radius . 'px}'
-			. '#' . $opt->honeypot_id . '{display:none;position:absolute;top:-9999px;left:-9999px;}</style>';
+		$return  = '<style id="wsforms-css" type="text/css">:root {--wsform-dominant: ' . $wsf->dominant_color
+			. ';--wsform-text: ' . $wsf->text_color . ';--wsform-header: ' . $wsf->header_color 
+            . ';--wsform-background: ' . $wsf->background_color . ';--wsform-field: ' . $wsf->field_color 
+            . ';--wsform-field-border: ' . $wsf->field_border_color . ';--wsform-field-border-width: ' 
+            . $wsf->field_border_width . ';--wsform-field-border-radius: ' . $wsf->field_border_radius . 'px}'
+			. '#' . $wsf->honeypot_id . '{display:none;position:absolute;top:-9999px;left:-9999px;}</style>';
 
 		echo $return;
 	}
@@ -3804,6 +3827,16 @@ endif;
         global $post_type;
         if ( $post_type != 'wsform_sub' ) return;
     
+    }
+
+
+
+
+
+    static function weekdays()
+    {
+        // Set the weekdays
+        return [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
     }
     
 

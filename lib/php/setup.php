@@ -15,7 +15,7 @@ require_once( ABSPATH . 'wp-admin/includes/file.php' );
 add_filter( 'widget_text', 'do_shortcode' );
 
 // new line; set the CRLF in a variable
-$nl = "\r\n";
+// $nl = "\r\n";
 
 // set the version
 $ver = get_bloginfo( 'version' );

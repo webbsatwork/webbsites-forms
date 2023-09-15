@@ -1,16 +1,10 @@
 <?php
-// create custom plugin settings menu
-add_action( 'admin_menu', 'wsform_create_menu' );
 
-// create the wsform_forms object
-$wsform_forms = new stdClass();
-
+// Instantiate new WebbsitesForm() object for options page
 $wsf = new WebbsitesForm();
 
-// $wsform_forms->prefix 		= 'wsform-form';
-// $wsform_forms->groupname 	= $wsform_forms->prefix . '-settings-group';
-// $wsform_forms->page_title 	= 'Webbsites Forms Settings';
-// $wsform_forms->menu_title 	= 'Settings';
+// create custom plugin settings menu
+add_action( 'admin_menu', 'wsform_create_menu' );
 
 
 function wsform_create_menu()
@@ -27,6 +21,7 @@ function wsform_create_menu()
 
 	//call register settings function
 	add_action( 'admin_init', 'wsform_register_settings' );
+	// add_action( 'admin_init', [ 'WebbsitesForm', 'register_settings' ] );
 }
 
 
@@ -34,15 +29,8 @@ function wsform_register_settings()
 {
 	global $wsf;
 
-    // // register our settings
-    // $opts = $wsf->opt_names;
-
-    // foreach( $opts as $opt )
-    // {
-    //     register_setting( $wsf->settings_groupname, $opt[0] );
-    // }
-
 	//register our settings
+	register_setting( $wsf->settings_groupname, '_wsform_opt_initial_setup' );
 	register_setting( $wsf->settings_groupname, '_wsform_opt_daemon_id' );
 	register_setting( $wsf->settings_groupname, '_wsform_opt_default_sender' );
 	register_setting( $wsf->settings_groupname, '_wsform_opt_default_recipient' );
@@ -65,29 +53,6 @@ function wsform_register_settings()
 function wsform_settings_page()
 {
 	global $wsf;
-
-    // $opt = $wsf->opt_vals;
-
-    // $wsf = new WebbsitesForm();
-
-
-	// // Get Initial Defaults
-	// $opt_daemon_id = 			get_option( '_wsform_opt_daemon_id',                'wf' );
-	// $opt_default_sender = 		get_option( '_wsform_opt_default_sender',           'no-reply@' . $_SERVER['SERVER_NAME'] );
-	// $opt_default_recipient =    get_option( '_wsform_opt_default_recipient',        get_option( 'admin_email' ) );
-	// $opt_default_success_msg =  get_option( '_wsform_opt_default_success_message',  'Your message was successfully sent!' );
-	// $opt_default_error_msg = 	get_option( '_wsform_opt_default_error_message',    'Sorry, there was a problem.' );
-	// $opt_mx_email = 			get_option( '_wsform_opt_mx_email',                 $opt_default_recipient );
-	// $opt_honeypot_id = 			get_option( '_wsform_opt_honeypot_id',              'wf_url' );
-	// $opt_dominant_color = 		get_option( '_wsform_opt_dominant_color',           'rgb(68, 68, 68)' );
-	// $opt_text_color = 			get_option( '_wsform_opt_text_color',               'rgb(34, 34, 34)' );
-	// $opt_header_color = 		get_option( '_wsform_opt_header_color',             'rgb(119, 119, 119)' );
-	// $opt_background_color = 	get_option( '_wsform_opt_background_color',         'rgb(238, 238, 238)' );
-	// $opt_field_color = 			get_option( '_wsform_opt_field_color',              'rgb(255, 255, 255)' );
-	// $opt_field_border = 		get_option( '_wsform_opt_field_border',             'rgba(0, 0, 0, 0)' );
-	// $opt_field_border_width =	get_option( '_wsform_opt_field_border_width',       '1px' );
-    // $opt_field_border_radius =  get_option( '_wsform_opt_field_border_radius',      5 );
-
 ?>
 
 <style type="text/css">

@@ -1,7 +1,6 @@
 <?php
 
 
-
 class WebbsitesFormSub extends WebbsitesForm
 {
 	// Submissions
@@ -25,11 +24,13 @@ class WebbsitesFormSub extends WebbsitesForm
 	public $output_permalink;
     public $sub_wf_status;
     public $sub_post_info;
+    public $nl;
 
 
 	// Constructor
 	function __construct( $sub_id = null )
 	{
+        $this->nl = "\r\n";
         if( $sub_id != null )
             $this->webbsitesform_sub( $sub_id );
 	}
@@ -307,7 +308,7 @@ class WebbsitesFormSub extends WebbsitesForm
 
 	function form_sub_output()
 	{
-		global $nl;
+		$nl = $this->nl;
 
 		// save the message body
 		$sender_name   = trim( strip_tags( stripslashes( $this->sub_wf_sender_name ) ) );
@@ -458,7 +459,9 @@ class WebbsitesFormSub extends WebbsitesForm
     // DEPRECATED
 	function get_form_sub()
 	{
-		global $nl;
+		// global $nl;
+
+        $nl = $this->nl;
 
 		// print_array( $this );
 
@@ -913,7 +916,8 @@ class WebbsitesFormSub extends WebbsitesForm
         // return true;
         // bw
 
-		global $nl;
+		// global $nl;
+        $nl = $this->nl;
 
 		$sub_id = $this->sub_id;
 		$post = $this->sub_sanitized_data;
@@ -1118,7 +1122,8 @@ class WebbsitesFormSub extends WebbsitesForm
 
 	private function send_nice_email( $args )
 	{
-		global $nl;
+		// global $nl;
+        $nl = $this->nl;
 
 		//$args = array(
 		//	'from_email' => $from_email (REQUIRED),

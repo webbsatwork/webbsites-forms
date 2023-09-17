@@ -20,9 +20,6 @@ add_filter( 'widget_text', 'do_shortcode' );
 // set the version
 $ver = get_bloginfo( 'version' );
 
-// create a global variable
-global $wsform_form;
-
 
 // Increase the upload sizes
 @ini_set( 'upload_max_size' , '64M' );
@@ -41,8 +38,6 @@ function wsform_setup_form_plugin()
 {
 	//wsform_options();
 	$wf = new WebbsitesForm();
-
-    // $options = $wf->opt_vals;
 
 	// default forms email sender
 	if( $wf->default_sender == '' )
@@ -68,11 +63,8 @@ function wsform_setup_form_plugin()
 	// set constant for email sender
 	define( 'WSFORM_EMAIL_FROM', $wf->default_sender );
 
-	// set constant for email sender
-	define( 'WSFORM_HONEYPOT_ID', $wf->honeypot_id );
-
-	//// set constant for email sender
-	//define( 'WSFORM_SSL_KEY', $wf->openssl_key );
+	// // set constant for email sender
+	// define( 'WSFORM_HONEYPOT_ID', $wf->honeypot_id );
 
 	// constant for path to forms folder
 	define( 'WSFORM_SITE_HOME_DIR', get_home_path() );

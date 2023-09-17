@@ -55,9 +55,6 @@ class WebbsitesForm
 	public $save_email_responses;
 
 	// Options
-    // public $opt_names;
-    // public $opt_vals;
-
 	public $daemon_id;
 	public $default_sender;
 	public $default_recipient;
@@ -89,8 +86,8 @@ class WebbsitesForm
 	public $site_name;
 	public $form_parameters;
 	public $form_input_types;
-    // public $weekdays;
 
+    // Error messages
     public $error = false;
     public $error_msg = '';
     public $output_atts = null;
@@ -103,8 +100,6 @@ class WebbsitesForm
 	// Constructor
 	function __construct( $post_id = null )
 	{
-        $this->check_initial_setup();
-        // $this->form_input_types();
         $this->settings();
 
         // If form_id supplied, get the form
@@ -113,42 +108,59 @@ class WebbsitesForm
 
 
 
-    private function check_initial_setup()
+    private function default_settings()
     {
-        // $initial_setup = get_option( '_wsform_opt_initial_setup' );
-
-        // If initial setup hasn't been completed, run it
-        if( ! get_option( '_wsform_opt_initial_setup' ) )
-        {
-            add_option( '_wsform_opt_initial_setup', true );
-            add_option( '_wsform_opt_daemon_id', 'wf' );
-            add_option( '_wsform_opt_default_sender', 'no-reply@' . $_SERVER['SERVER_NAME'] );
-            add_option( '_wsform_opt_default_recipient', get_option( 'admin_email' ) );
-            add_option( '_wsform_opt_default_success_message', 'Your message was successfully sent!' );
-            add_option( '_wsform_opt_default_error_message', 'Sorry, there was a problem.' );
-            add_option( '_wsform_opt_mx_email', null );
-            add_option( '_wsform_opt_honeypot_id', 'wsform_url' );
-            add_option( '_wsform_opt_dominant_color', 'rgb(68, 68, 68)' );
-            add_option( '_wsform_opt_text_color', 'rgb(34, 34, 34)' );
-            add_option( '_wsform_opt_header_color', 'rgb(119, 119, 119)' );
-            add_option( '_wsform_opt_background_color', 'rgb(238, 238, 238)' );
-            add_option( '_wsform_opt_field_color', 'rgb(255, 255, 255)' );
-            add_option( '_wsform_opt_field_border_color', 'rgba(0, 0, 0)' );
-            add_option( '_wsform_opt_field_border_width', '1px' );
-            add_option( '_wsform_opt_field_border_radius', '5' );
-        }
+        // Sets the defaults
+        add_option( '_wsform_opt_initial_setup', true );
+        add_option( '_wsform_opt_daemon_id', 'wf' );
+        add_option( '_wsform_opt_default_sender', 'no-reply@' . $_SERVER['SERVER_NAME'] );
+        add_option( '_wsform_opt_default_recipient', get_option( 'admin_email' ) );
+        add_option( '_wsform_opt_default_success_message', 'Your message was successfully sent!' );
+        add_option( '_wsform_opt_default_error_message', 'Sorry, there was a problem.' );
+        add_option( '_wsform_opt_mx_email', null );
+        add_option( '_wsform_opt_honeypot_id', 'wsform_url' );
+        add_option( '_wsform_opt_dominant_color', 'rgb(68, 68, 68)' );
+        add_option( '_wsform_opt_text_color', 'rgb(34, 34, 34)' );
+        add_option( '_wsform_opt_header_color', 'rgb(119, 119, 119)' );
+        add_option( '_wsform_opt_background_color', 'rgb(238, 238, 238)' );
+        add_option( '_wsform_opt_field_color', 'rgb(255, 255, 255)' );
+        add_option( '_wsform_opt_field_border_color', 'rgba(0, 0, 0)' );
+        add_option( '_wsform_opt_field_border_width', '1px' );
+        add_option( '_wsform_opt_field_border_radius', '5' );
     }
 
 
 
     private function settings()
     {
+
         // Set settings data
         $this->settings_prefix 		= 'wsform-form';
         $this->settings_groupname 	= $this->settings_prefix . '-settings-group';
 		$this->server_name          = $_SERVER['SERVER_NAME'];
 		$this->site_name            = get_bloginfo( 'name' );
+
+        //register our settings
+        register_setting( $this->settings_groupname, '_wsform_opt_daemon_id' );
+        register_setting( $this->settings_groupname, '_wsform_opt_default_sender' );
+        register_setting( $this->settings_groupname, '_wsform_opt_default_recipient' );
+        register_setting( $this->settings_groupname, '_wsform_opt_default_success_message' );
+        register_setting( $this->settings_groupname, '_wsform_opt_default_error_message' );
+        register_setting( $this->settings_groupname, '_wsform_opt_mx_email' );
+        register_setting( $this->settings_groupname, '_wsform_opt_honeypot_id' );
+        register_setting( $this->settings_groupname, '_wsform_opt_dominant_color' );
+        register_setting( $this->settings_groupname, '_wsform_opt_text_color' );
+        register_setting( $this->settings_groupname, '_wsform_opt_header_color' );
+        register_setting( $this->settings_groupname, '_wsform_opt_background_color' );
+        register_setting( $this->settings_groupname, '_wsform_opt_field_color' );
+        register_setting( $this->settings_groupname, '_wsform_opt_field_border_color' );
+        register_setting( $this->settings_groupname, '_wsform_opt_field_border_width' );
+        register_setting( $this->settings_groupname, '_wsform_opt_field_border_radius' );
         
+        // If initial setup hasn't been completed, run it
+        if( ! get_option( '_wsform_opt_initial_setup' ) )
+            $this->default_settings();
+
         // Get Options
         $this->daemon_id            = get_option( '_wsform_opt_daemon_id' );
         $this->default_sender       = get_option( '_wsform_opt_default_sender' );
@@ -166,41 +178,31 @@ class WebbsitesForm
         $this->field_border_width   = get_option( '_wsform_opt_field_border_width' );
         $this->field_border_radius  = get_option( '_wsform_opt_field_border_radius' );
 
-        // // Set all options
-        // $this->opt_vals = new stdClass();
-
-        // foreach( $this->opt_names as $key => $arr )
-        // {
-        //     $this->opt_vals->$key = get_option( $arr[0], $arr[1] );
-        // }
-
-        // print_array( $this->opt_vals );
-
-    }
-
-
-    static function register_settings()
-    {
         return;
-        global $wsf;
-    
-        //register our settings
-        register_setting( $wsf->settings_groupname, '_wsform_opt_daemon_id' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_default_sender' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_default_recipient' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_default_success_message' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_default_error_message' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_mx_email' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_honeypot_id' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_dominant_color' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_text_color' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_header_color' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_background_color' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_field_color' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_field_border_color' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_field_border_width' );
-        register_setting( $wsf->settings_groupname, '_wsform_opt_field_border_radius' );
+
+        // Additional form properties
+        // Set some needed variables
+        $site_home_dir = get_home_path();
+
+
+		// $this->path_to_plugin 			= WSFORM_PATH_TO_PLUGIN;
+        $this->path_to_plugin = $site_home_dir . 'wp-content/plugins/webbsites-forms/';
+
+		// $this->uploads_dir_url 			= WSFORM_UPLOADS_DIR;
+        $this->uploads_dir_url = site_url( '/wp-content/webbsites-forms/uploads/' );
+
+		// $this->uploads_dir_path 		= WSFORM_UPLOADS_DIR_PATH;
+        // $this->path_to_forms = 
+        // $this->uploads_dir_path = $site_home_dir . 
+
+		// $this->path_to_custom_output 	= WSFORM_PATH_TO_CUSTOM_OUTPUT;
+		// $this->working_folder_path 		= WSFORM_UPLOADS_DIR_PATH;
+		// $this->path_to_display_file 	= WSFORM_PATH_TO_DISPLAY_FORMS;
+		// $this->path_to_custom_forms 	= WSFORM_PATH_TO_CUSTOM_FORMS;
+
     }
+
+
     
     
     
@@ -911,7 +913,7 @@ class WebbsitesForm
 				<div id="<?php echo $this->honeypot_id ?>" class="wsform-line">
 					<div class="wsform-input-div">
 						<div class="wsform-label">Leave Empty</div>
-						<input id="<?php echo $this->honeypot_id ?>-input" class="wsform-input" name="<?php echo $opt->honeypot_id ?>" type="text" placeholder="Leave Empty" data-field-desc="url-input" />
+						<input id="<?php echo $this->honeypot_id ?>-input" class="wsform-input" name="<?php echo $this->honeypot_id ?>" type="text" placeholder="Leave Empty" data-field-desc="url-input" />
 					</div>
 				</div>
 
